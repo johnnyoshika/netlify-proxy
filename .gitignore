@@ -1,2 +1,3 @@
 .netlify
 build/
+.DS_Store

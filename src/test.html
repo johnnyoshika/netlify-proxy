@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title></title>
+    <link rel="stylesheet" href="/css/styles.css" media="screen" />
+  </head>
+  <body>
+    <h3>Proxy output:</h3>
+    <textarea data-proxy-output style="width:100%;height:200px;"></textarea>
+    <h3>SMS link</h3>
+    <ul>
+      <li><a href="sms:6049999999">Phone Only</a></li>
+      <li><a href="sms:6049999999?body=tag%2312345++">Android</a></li>
+      <li><a href="sms:6049999999;body=tag%2312345++">iOS</a></li>
+      <li><a href="sms:6049999999&body=tag%2312345++">iOS 8+</a></li>
+    </ul>
+
+    <h3>widget test on iPhone (works here but not inside widget iframe)</h3>
+    <a href="sms:+16042391989&amp;body=RE:%23cc7cf%20-%20" data-reactid=".0.0.2.0"><i class="fa fa-mobile" data-reactid=".0.0.2.0.0"></i><span data-reactid=".0.0.2.0.1">(604) 239-1989</span></a>
+    <a href="tel:+16042391989" data-reactid=".0.0.3.0"><i class="fa fa-phone" data-reactid=".0.0.3.0.0"></i><span data-reactid=".0.0.3.0.1">Call</span></a>
+
+    <p><a href="https://developer.apple.com/library/ios/featuredarticles/iPhoneURLScheme_Reference/SMSLinks/SMSLinks.html">Apple Reference</a></p>
+    <p><a href="http://stackoverflow.com/a/19126326/188740">http://stackoverflow.com/a/19126326/188740</a></p>
+    <p><a href="http://stackoverflow.com/q/31386732/188740">http://stackoverflow.com/q/31386732/188740</a></p>
+
+    <p><a href="http://localhost:8910">localhost:8910 referrer</a></p>
+
+    <p><a href="http://192.168.1.24:8910/?utm_campaign=my+campaign&utm_source=my+source">192.168.1.24:8910 referrer with campaign</a></p>
+
+    <h3>Tel link</h3>
+    <ul>
+      <li><a href="tel:1-604-999-9999">1-604-999-9999</a></li>
+    </ul>
+
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat est, viverra ornare luctus eget, lobortis id turpis. Quisque id libero eu nulla porttitor laoreet. Vivamus rutrum tempus molestie. Curabitur tempus orci a nibh sagittis, et mollis quam aliquam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus aliquet ligula quis dignissim vestibulum. Ut ac felis quis magna condimentum mattis nec a mauris. Quisque volutpat molestie leo quis posuere. In accumsan, velit pellentesque consectetur porttitor, justo felis convallis odio, eget dignissim turpis lacus eu augue. Donec interdum rutrum dolor, et efficitur justo blandit ac. Cras porta tristique nisl.
+
+Donec quis arcu mauris. Cras mauris augue, commodo facilisis est vel, pulvinar mattis sem. Aliquam ut elementum ligula. Aenean luctus consectetur lacus ut interdum. Mauris ac purus pharetra, condimentum dolor nec, eleifend mi. Aenean ultrices efficitur nunc, quis dignissim nibh scelerisque ac. Morbi sed felis luctus, venenatis felis at, condimentum ligula. Etiam lectus quam, vestibulum a lorem ac, vehicula pellentesque metus.
+
+Etiam volutpat dignissim luctus. Etiam tincidunt vel elit eu egestas. Suspendisse a enim ac tortor vestibulum varius sed non urna. In hac habitasse platea dictumst. Donec a semper turpis. Curabitur porta, lorem at fringilla sagittis, ligula libero luctus lacus, et vestibulum risus lacus vel justo. Phasellus congue et tellus non mollis. Phasellus bibendum malesuada elit, sed commodo purus volutpat a. Proin varius, mauris et vehicula venenatis, purus lacus ullamcorper est, ut sodales dolor ante a ex. Sed dignissim orci vel finibus tempor.
+
+Integer blandit diam ante, eget laoreet enim pellentesque luctus. Maecenas orci magna, accumsan blandit ex eu, lacinia vehicula odio. Integer interdum nisl felis, non auctor purus convallis non. Proin faucibus, erat vel venenatis auctor, risus turpis consequat nulla, at dignissim elit quam eu nulla. Sed tempus, massa ac tincidunt feugiat, nunc turpis fermentum dolor, ac accumsan magna urna eget ligula. Pellentesque sagittis libero leo, sit amet sollicitudin est consequat at. Sed venenatis neque diam, sit amet blandit velit scelerisque pharetra. Sed ut odio at ligula venenatis porttitor sed a augue. Quisque sit amet dignissim nunc. Maecenas rutrum felis arcu, a dapibus leo ultricies a. In auctor interdum augue ac egestas. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam in egestas lacus, sed ultrices nisl. Nulla facilisi. Pellentesque rutrum ultrices felis ac interdum. Nunc sed hendrerit tortor, non convallis velit.
+    </p>
+
+    <script>
+      (function() {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4)
+              document.querySelector('[data-proxy-output]').innerText = xhr.responseText;
+        }
+        xhr.open('GET', '/rest/v1.0/jobcategories');
+        xhr.send();
+      }());
+    </script>
+    <script>
+      window.OlioWidget = window.OlioWidget || [];
+      OlioWidget.push(['key', '2a0f8661-0ef4-4d04-8db1-d4118ab655df']);
+      (function () {
+        var script = document.createElement('script');
+        script.async = true;
+        script.type = 'text/javascript';
+        script.src = 'https://widget.oliolab.com/widget.js';
+        document.body.appendChild(script);
+      }());
+    </script>
+  </body>
+</html>
