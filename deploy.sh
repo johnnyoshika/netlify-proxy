@@ -10,4 +10,4 @@ cp -a src/. build/
 
 echo "Build finished!"
 
-netlify deploy
+netlify deploy --dir=build --prod
