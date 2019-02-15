@@ -1,1 +1,2 @@
 /rest/*  https://www.bcjobs.ca/rest/:splat  200
+https://johnny.netlify.com/rewrite/* /:splat 200
