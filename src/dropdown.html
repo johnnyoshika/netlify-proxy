@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title></title>
+  </head>
+  <body>
+    <form action="" method="POST">
+      <br />
+      <br />
+      <select name="categories" data-dropdown></select>
+      <br />
+      <br />
+      <input type="text" />
+      <br />
+      <br />
+      <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        (function() {
+          var xhr = new XMLHttpRequest();
+          xhr.onreadystatechange = function() {
+              if (xhr.readyState !== 4)
+                return;
+
+              var categories = JSON.parse(xhr.responseText).data;
+              document.querySelector('[data-dropdown]').innerHTML = categories
+                .map(c => '<option id="' + c.id + '">' + c.name + '</option>')
+                .join('');
+          };
+          xhr.open('GET', '/api/v1.1/jobcategories');
+          xhr.send();
+        }());
+      </script>
+  </body>
+</html>

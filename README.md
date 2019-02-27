@@ -3,6 +3,8 @@
   * `npm install http-server -g`
 * Start server:
   * `http-server ./src`
+  OR
+  * `http-server ./src --proxy https://www.bcjobs.ca`
 * Browse:
   * http://localhost:8080/
 
