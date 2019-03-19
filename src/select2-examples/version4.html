@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title></title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <style>
+      body {
+        font-family:sans-serif;
+      }
+
+      .container {
+        padding: 20px;
+      }
+
+      select {
+        width: 500px;
+      }
+    </style>
+  </head>
+  <body>
+      <div class="container">
+        <h2>Select2 Version 4</h2>
+        <p>Example for this Stackoverflow answer: <a href="https://stackoverflow.com/a/55247654/188740">https://stackoverflow.com/a/55247654/188740</a></p>
+        <p>Enter location. Canadian cities only &#128515;</p>
+        <select name="locations" multiple>
+          <option value="Whistler, BC" selected>Whistler, BC</option>
+        </select>
+      </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+      <script>
+        $('select[name="locations"]').select2({
+          placeholder: 'Enter location',
+          minimumInputLength: 3,
+          ajax: {
+            delay: 250,
+            url: '/api/v1.1/locations',
+            dataType: 'json',
+            data: function(params) {
+              this.data('term', params.term);
+              return {
+                q: params.term,
+                page: params.page || 1,
+                pageSize: 9
+              };
+            },
+            processResults: function(data) {
+              if (data.data.length)
+                return {
+                  results: data.data.map(d => ({id: d.description, text: d.description})),
+                  pagination: {
+                    more: !!data.paging.next
+                  }
+                };
+              else
+                return {
+                  results: [{ id: this.$element.data('term'), text: this.$element.data('term') }],
+                  pagination: {
+                    more: false
+                  }
+                };
+            },
+            cache: true
+          }
+        });
+      </script>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.1/select2.min.css" />
+    <style>
+      body {
+        font-family:sans-serif;
+      }
+
+      .container {
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+      <div class="container">
+        <h2>Select2 Version 3.5</h2>
+        <p>Example for this Stackoverflow answer: <a href="https://stackoverflow.com/a/55247654/188740">https://stackoverflow.com/a/55247654/188740</a></p>
+        <p>Enter location. Canadian cities only &#128515;</p>
+        <input type="hidden" name="locations" value="Whistler, BC" style="width:500px;" />
+      </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.1/select2.min.js"></script>
+      <script>
+        $('input[name="locations"]').select2({
+          placeholder: 'Enter location',
+          minimumInputLength: 3,
+          tags: true,
+          multiple: true,
+          createSearchChoice: function(term, data) {
+            if (!data.length)
+              return { id: term, text: term };
+          },
+          ajax: {
+            url: '/api/v1.1/locations',
+            dataType: 'json',
+            quietMillis: 250,
+            data: function(term, page) {
+              return {
+                q: term,
+                pageSize: 7
+              };
+            },
+            results: function(data, page) {
+              return { 
+                results: data.data.map(l => ({id: l.description, text: l.description}))
+              };
+            },
+            cache: true
+          },
+          initSelection: function(element, callback) {
+            var description = $(element).val();
+            callback({id: description, text: description});
+          }
+        });
+      </script>
+  </body>
+</html>
