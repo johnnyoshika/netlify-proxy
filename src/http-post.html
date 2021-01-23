@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>HTTP Post</title>
+  </head>
+  <body>
+    <h1>Test HTTP Post to localhost</h1>
+    <input
+      type="url"
+      name="url"
+      value="http://localhost:8000/point/55988e8e-15a3-446b-8419-ea2e140a08f5"
+      style="width: 400px"
+    />
+    <br />
+    <br />
+    <textarea name="body" style="width: 400px; height: 300px">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      Aliquam et odio at orci lobortis commodo vel at nisi.
+      Donec a est sagittis, suscipit arcu in, pretium mauris.
+      Mauris mauris lorem, egestas vel ipsum sit amet, ultrices mattis nunc.
+    </textarea>
+    <br />
+    <br />
+    <button type="submit">Send</button>
+    <script>
+      document
+        .querySelector('button')
+        .addEventListener('click', function (e) {
+          fetch(document.querySelector('[name="url"]').value, {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'omit',
+            headers: {
+              'Content-Type': 'text/plain'
+            },
+            body: document.querySelector('[name="body"]').textContent
+          });
+        });
+    </script>
+  </body>
+</html>
