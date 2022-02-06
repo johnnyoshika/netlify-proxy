@@ -13,6 +13,7 @@
   <body>
     <div style="max-width: 600px; margin: 16px auto">
       <div style="margin: 16px">
+        <button id="clear-logs">Clear Logs</button>
         <button id="is-fullscreen-enabled">
           Is Fullscreen Enabled
         </button>
@@ -26,6 +27,13 @@
       <ul></ul>
     </div>
     <script>
+      document
+        .querySelector('#clear-logs')
+        .addEventListener(
+          'click',
+          () => (document.querySelector('ul').innerHTML = ''),
+        );
+
       const log = message =>
         (document.querySelector('ul').innerHTML =
           document.querySelector('ul').innerHTML +
