@@ -79,6 +79,9 @@
       document.querySelector('textarea').addEventListener('blur', () =>
         log('Textarea blur'),
       );
+
+      window.addEventListener('focus', () => log('Window focus'));
+      window.addEventListener('blur', () => log('Window blur'));
     </script>
   </body>
 </html>
