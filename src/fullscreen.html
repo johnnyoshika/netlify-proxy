@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Fullscreen</title>
+  </head>
+  <body>
+    <div style="max-width: 600px; margin: 16px auto;">
+      <div style="margin: 16px">
+        <button id="is-fullscreen-enabled">
+          Is Fullscreen Enabled
+        </button>
+        <button id="is-fullscreen">Is Fullscreen?</button>
+        <button id="request-fullscreen">Request Fullscreen</button>
+        <button id="exit-fullscreen">Exit Fullscreen</button>
+      </div>
+      <div style="margin: 16px">
+        <textarea style="width: 100%; height: 200px;"></textarea>
+      </div>
+      <ul></ul>
+    </div>
+    <script>
+      const log = message =>
+        (document.querySelector('ul').innerHTML =
+          document.querySelector('ul').innerHTML +
+          `<li>${message}</li>`);
+
+      document
+        .querySelector('#is-fullscreen-enabled')
+        .addEventListener('click', () =>
+          log(
+            document.fullscreenEnabled
+              ? 'Fullscreen enabled'
+              : 'Fullscreen disabled',
+          ),
+        );
+
+      document
+        .querySelector('#is-fullscreen')
+        .addEventListener('click', () =>
+          log(
+            document.fullscreenElement
+              ? 'In fullscreen mode'
+              : 'Not fullscreen mode',
+          ),
+        );
+
+      document
+        .querySelector('#request-fullscreen')
+        .addEventListener('click', () =>
+          document.documentElement.requestFullscreen(),
+        );
+
+      document
+        .querySelector('#exit-fullscreen')
+        .addEventListener('click', () => document.exitFullscreen());
+
+      document.addEventListener('fullscreenchange', () =>
+        log(
+          `Fullscreen change: ${
+            document.fullscreenElement ? 'Enter' : 'Exit'
+          }`,
+        ),
+      );
+
+      document.addEventListener('fullscreenerror', () =>
+        log('Fullscreen error'),
+      );
+
+      document.querySelector('textarea').addEventListener('focus', () =>
+        log('Textarea focus'),
+      );
+
+      document.querySelector('textarea').addEventListener('blur', () =>
+        log('Textarea blur'),
+      );
+    </script>
+  </body>
+</html>
