@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <p>window.navigator.userAgent</p>
-
-  <pre></pre>
-  <script>
-    document.querySelector('pre').textContent = window.navigator.userAgent;
-  </script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bowser/2.11.0/bundled.js"></script>
+  </head>
+  <body>
+    <h3>User Agent</h3>
+    <pre id="user-agent"></pre>
+    <h3>Browser</h3>
+    <pre id="browser"></pre>
+    <script>
+      document.querySelector('#user-agent').textContent =
+        window.navigator.userAgent;
+      const browser = bowser.getParser(window.navigator.userAgent);
+      document.querySelector('#browser').textContent = JSON.stringify(
+        browser.parsedResult,
+        null,
+        2,
+      );
+    </script>
+  </body>
 </html>
