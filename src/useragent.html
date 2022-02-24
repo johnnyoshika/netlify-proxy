@@ -15,6 +15,8 @@
     <pre id="user-agent"></pre>
     <h3>Browser</h3>
     <pre id="browser"></pre>
+    <h3>maxTouchPoints</h3>
+    <pre id="max-touch-points"></pre>
     <script>
       document.querySelector('#user-agent').textContent =
         window.navigator.userAgent;
@@ -24,6 +26,15 @@
         null,
         2,
       );
+
+      // Safari in iPad as of iPad OS 13 reports itself as Intel based Mac: https://developer.apple.com/forums/thread/119186
+      // To overcome this limitation, use touch detection to detect iPad: https://stackoverflow.com/a/63651533/188740
+      // Note: isIPad will be false for iPad OS < 13
+      const maxTouchPoints = window.navigator.maxTouchPoints
+        ? window.navigator.maxTouchPoints
+        : 0;
+
+      document.querySelector('#max-touch-points').textContent = maxTouchPoints;
     </script>
   </body>
 </html>
