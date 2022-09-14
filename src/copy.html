@@ -12,19 +12,12 @@
 <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec elementum ac mi et pulvinar. Donec euismod urna elit, ut maximus ligula convallis eget. Cras a quam at turpis consequat tempus quis sed turpis. Nam nec massa leo. Praesent hendrerit consectetur tempor. Phasellus ut condimentum nisi, eu lobortis arcu.</p>
 <p>Etiam augue odio, consectetur nec felis vel, imperdiet posuere libero. Proin odio ex, pellentesque non nibh eget, commodo facilisis dolor. Nulla sed efficitur tellus. Fusce ac dolor eu eros accumsan dignissim. Vivamus eget lacinia mauris, nec varius ligula. Fusce eleifend nisi vitae mauris commodo, finibus auctor tortor hendrerit. Maecenas posuere eget est sit amet sodales. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer pharetra et velit in fermentum. Phasellus vulputate mi eros. Aliquam quam neque, hendrerit ac tortor nec, tempor commodo ante. Donec aliquet sagittis tortor, vitae blandit eros pharetra a.</p>
   <script>
-    const onKeydown = e => {
-      if (e.key === 'a' && (e.metaKey || e.ctrlKey)) {
+    document.addEventListener('keydown', e => {
+      if (e.key === 'a' && (e.metaKey || e.ctrlKey))
         e.preventDefault();
-        console.log('prevent selection');
-      }
+    }, false);
 
-      if (e.key === 'c' && (e.metaKey || e.ctrlKey)) {
-        e.preventDefault();
-        console.log('prevent copy');
-      }
-    };
-
-    document.addEventListener('keydown', onKeydown, false);
+    ['copy', 'cut'].forEach(type => window.addEventListener(type, e => e.preventDefault(), false));
   </script>
 </body>
 </html>
