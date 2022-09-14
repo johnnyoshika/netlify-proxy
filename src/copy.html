@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Copy</title>
+</head>
+<body>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pretium elit sapien. In rhoncus vestibulum orci vel viverra. Aenean interdum ex a massa sodales pellentesque. Proin venenatis feugiat mi, vitae bibendum arcu vehicula sit amet. Aenean non justo pellentesque, posuere nisi eu, placerat ex. Suspendisse potenti. Praesent nec dolor elementum, interdum neque eu, lobortis tortor. Aliquam nulla nisi, malesuada nec commodo ut, efficitur non orci. Suspendisse vitae gravida nibh. Etiam sodales facilisis pharetra. Nam vulputate laoreet commodo. Donec sagittis viverra tellus, eget euismod lectus ultricies nec. Nullam quis turpis scelerisque, cursus tellus quis, laoreet elit.</p>
+<p>Curabitur molestie leo ac euismod facilisis. Nunc aliquet metus sed volutpat molestie. Cras hendrerit justo eget nunc consequat sagittis. Pellentesque ac ullamcorper lectus, ut molestie erat. Donec hendrerit ipsum ac velit feugiat, et pulvinar est pellentesque. Etiam eros magna, interdum a tortor id, convallis egestas tellus. Duis gravida et velit a scelerisque. Proin ut lectus in dui iaculis commodo.</p>
+<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec elementum ac mi et pulvinar. Donec euismod urna elit, ut maximus ligula convallis eget. Cras a quam at turpis consequat tempus quis sed turpis. Nam nec massa leo. Praesent hendrerit consectetur tempor. Phasellus ut condimentum nisi, eu lobortis arcu.</p>
+<p>Etiam augue odio, consectetur nec felis vel, imperdiet posuere libero. Proin odio ex, pellentesque non nibh eget, commodo facilisis dolor. Nulla sed efficitur tellus. Fusce ac dolor eu eros accumsan dignissim. Vivamus eget lacinia mauris, nec varius ligula. Fusce eleifend nisi vitae mauris commodo, finibus auctor tortor hendrerit. Maecenas posuere eget est sit amet sodales. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer pharetra et velit in fermentum. Phasellus vulputate mi eros. Aliquam quam neque, hendrerit ac tortor nec, tempor commodo ante. Donec aliquet sagittis tortor, vitae blandit eros pharetra a.</p>
+  <script>
+    const onKeydown = e => {
+      if (e.key === 'a' && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        console.log('prevent selection');
+      }
+
+      if (e.key === 'c' && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        console.log('prevent copy');
+      }
+    };
+
+    document.addEventListener('keydown', onKeydown, false);
+  </script>
+</body>
+</html>
