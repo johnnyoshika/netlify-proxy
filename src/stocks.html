@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stocks</title>
+</head>
+<body>
+  <h3>Target: $50,000</h3>
+
+  <form id="form">
+    <table>
+      <thead>
+        <tr>
+          <th>Stock symbol (optional)</th>
+          <th>Price per share</th>
+          <th>Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input name="symbol[0]" type="text" value="" /></td>
+          <td><input name="price[0]" type="number" value="" step=".01" required /></td>
+          <td><input name="quantity[0]" type="text" value="" disabled /></td>
+        </tr>
+        <tr>
+          <td><input name="symbol[1]" type="text" value="" /></td>
+          <td><input name="price[1]" type="number" value="" step=".01" required /></td>
+          <td><input name="quantity[1]" type="text" value="" disabled /></td>
+        </tr>
+        <tr>
+          <td><input name="symbol[2]" type="text" value="" /></td>
+          <td><input name="price[2]" type="number" value="" step=".01" required /></td>
+          <td><input name="quantity[2]" type="text" value="" disabled /></td>
+        </tr>
+        <tr>
+          <td><input name="symbol[3]" type="text" value="" /></td>
+          <td><input name="price[3]" type="number" value="" step=".01" required /></td>
+          <td><input name="quantity[3]" type="text" value="" disabled /></td>
+        </tr>
+        <tr>
+          <td><input name="symbol[4]" type="text" value="" /></td>
+          <td><input name="price[4]" type="number" value="" step=".01" required /></td>
+          <td><input name="quantity[4]" type="text" value="" disabled /></td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+      <button type="submit">Calculate</button>
+    </div>
+  </form>
+  
+  <script>
+
+  (function() {
+    const target = 50000;
+
+    const randomBetween = (min, max) =>
+      Math.floor(Math.random() * (max - min + 1) + min);
+
+    const execute = (stocks) => {
+
+      // Absolute max number of possible iterations required to hit target
+      const maxIterations = Math.round(
+        stocks.reduce(
+          (acc, next) => Math.min(acc, target / next.price),
+          Number.MAX_SAFE_INTEGER,
+        ),
+      );
+
+      // Reasonble guess of iteration start value to reduce the number of iterations
+      const startIterations = Math.round(maxIterations / 6);
+
+      // Give it a little bit of randomness
+      const randomStartIterationForPositionZero = (position) =>
+        position === 0
+          ? randomBetween(startIterations, startIterations * 2)
+          : startIterations;
+
+      const sum = (quantities) =>
+        quantities.reduce(
+          (acc, next, i) => acc + stocks[i].price * next,
+          0,
+        );
+
+      const iterate = (
+        quantities,
+        position,
+      ) => {
+        for (
+          let i = randomStartIterationForPositionZero(position);
+          i < maxIterations;
+          i++
+        ) {
+          quantities[position] = i;
+
+          if (position < quantities.length - 1) {
+            const result = iterate(quantities, position + 1);
+            if (result !== undefined) {
+              return result;
+            }
+          } else {
+            const total = sum(quantities);
+            if (Math.abs(total - target) < 0.005) {
+              return quantities;
+            }
+
+            if (total > target) return;
+          }
+        }
+      };
+      const quantities = [0, 0, 0, 0, 0];
+      return iterate(quantities, 0);
+    }
+
+    document.querySelector('#form').addEventListener('change', e => {
+      Array.from(Array(5)).forEach((_, i) => {
+        document.querySelector(`input[name="quantity[${i}]"]`).value = '';
+      });
+    });
+
+    document.querySelector('#form').addEventListener('submit', e => {
+      e.preventDefault();
+      document.querySelector('button').disabled = true;
+      const values = Object.fromEntries(new FormData(document.querySelector('#form')));
+      const stocks = Array.from(Array(5)).map((_, i) => ({symbol: values[`symbol[${i}]`], price: parseFloat(values[`price[${i}]`])}));
+      const result = execute(stocks);
+      document.querySelector('button').disabled = false;
+
+      if (!result) {
+        alert('No solution found');
+        return;
+      }
+
+      stocks.forEach((stock, i) => {
+        document.querySelector(`input[name="quantity[${i}]"]`).value = result[i];
+      });
+    })
+  })();
+
+  </script>
+</body>
+</html>
