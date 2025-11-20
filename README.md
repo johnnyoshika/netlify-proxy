@@ -10,3 +10,5 @@
 ## Deploy
 
 Push `main` branch to GitHub
+
+https://johnny.netlify.app/
